@@ -11,8 +11,11 @@ namespace ChangeProcessor
     {
         public async Task Handle(ChangeCommand message, IMessageHandlerContext context)
         {
+            //simulate work
+            await Task.Delay(1000, context.CancellationToken);
             Console.WriteLine($"The change {message.ChangeToProcess.Name} - Batch {message.ChangeToProcess.BatchNumber} - {message.ChangeToProcess.Description} has been processed!");
 
+            
             await context.Publish(new ChangeCompleted()
             {
                 PersoonId = message.PersoonId,
